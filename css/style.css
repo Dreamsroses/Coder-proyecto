@@ -1,0 +1,9 @@
+* {
+   font-family: fantasy; 
+}
+
+h1{
+    background-color: darkslateblue;
+    color: white;
+    padding: 30px;
+}
