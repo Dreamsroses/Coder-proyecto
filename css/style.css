@@ -1,9 +1,68 @@
-* {
-   font-family: fantasy; 
+.menu-principal{
+    position: fixed;
+    z-index: 10;
 }
 
-h1{
-    background-color: darkslateblue;
+.simulador-title {
+    background-image: url(../img/bg-city.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-clip: padding-box;
+    text-align: center;
+    padding: 150px 0;
+    margin-bottom: 60px;
+}
+
+.simulador-title_time {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    background-color: #4E4AB8;
+    opacity: 2;
     color: white;
-    padding: 30px;
+    display: inline-block;
+    padding: 10px;
+}
+
+.hidden_title {
+    display: none;
+}
+
+.contentinput {
+    margin: 1.5rem 0;
+}
+
+#contenidoGenerado,
+#contenidoBackup {
+    margin: 5rem 0;
+}
+
+.label {
+    display: block;
+    margin: 2rem;
+}
+
+#btnSave,
+#btnDiscard {
+    margin-top: 1rem;
+}
+
+#contentTask {
+    margin: 2rem 0;
+}
+
+
+#taskbody{
+    margin: 40px 0;
+}
+
+footer {
+    background-color: #2C1766;
+    padding: 4rem;
+    color: white;
+    text-align: center;
+}
+
+.footer_parrafo {
+    margin: 20px 0;
 }
