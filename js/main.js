@@ -1,148 +1,145 @@
-// Bienvenida a las tareas con instrucciones
-let showData = alert("Agrega una tarea \n 1.- Indica el nombre de tú tarea \n 2.- La fecha de entrega \n 3.- Confirma si la tarea y fecha de entrega es correcta");
+// Tour virtual del sitio
+const intro = introJs();
 
-// funcion de creación tarea con la fecha
-const crearTask = function (newName, newTarea, newDate) {
-    this.name = newName;
-    this.tarea = newTarea;
-    this.date = newDate;
+intro.setOptions({
+
+    steps: [{
+            intro: "Bienvenido a TaskTime, tu web app de tareas, iniciemos el tour"
+        },
+        {
+            element: "#creatask",
+            intro: "Ingresa tu nombre"
+        },
+        {
+            element: "#titletask",
+            intro: "Agrega el nombre de la tarea"
+        },
+        {
+            element: "#datetask",
+            intro: "Indica la fecha en que finaliza la tarea"
+        },
+        {
+            element: "#btnSave",
+            intro: "Presione en Save para agregar la tarea y listo"
+        }
+    ]
+})
+
+document.querySelector(".start-tour").addEventListener("click", function () {
+    intro.start();
+})
+
+intro.start();
+
+
+// funcion de creación tarea
+class crearTask {
+    constructor(datos) {
+        this.name = datos.name;
+        this.tarea = datos.tarea;
+        this.date = datos.date;
+    }
 }
 
-// Array vacio con las tareas que se ingresaran en el prompt
+// Array vacio con las tareas que se ingresaran
 let listaTareas = [];
 
-// Aqui se ingresan la tarea y la fecha a de entrega
-listaTareas.push(new crearTask(prompt("Agregue su Nombre: "), prompt("Agregue su Tarea: "), prompt("Agregue una fecha de Entrega ")));
-
-// Alerta con un mensaje de la tarea y fecha ingresada anteriormente
-alert(
-    "Su Nombre es: " + listaTareas[0].name +
-    " Su tarea es: " + listaTareas[0].tarea +
-    " Con fecha de entrega en: " + listaTareas[0].date
-)
-
-// Log de Array
-console.log(listaTareas);
-
-// Mensaje que entrega la info de validación de la tarea/fecha con un si o no
-var validandoTask = prompt("Confirme con 0 para Yes si la tarea y fecha de entrega son correctas, de lo contrario escriba 1 para No, y volver a crear");
-
-for (let validador in validandoTask) {
-    if (validandoTask[validador] == 0) {
-        alert("Felicitaciones " + listaTareas[0].name + " Tarea ingresada correctamente");
-    }
+// Inicio vacio de tareas con un mensaje personalizado
+if (listaTareas.length == 0) {
+    contenidoGenerado.innerHTML = "No tienes tareas";
 }
 
-// Array que valida la tarea con si o no por el usuario
-var dataConfirm = ["No", "Yes"];
-
-// Recorrido que indica si es Si continue con las tareas
-for (var i = 0; i < 2; i++) {
-
-    if (i == 1) {
-        continue;
-
-    }
-
-}
-
-// Recorrido que indica cada confirmación, Si, NO o vacio de la tarea/Fecha
-while (validandoTask != "0") {
-
-    switch (validandoTask) {
-
-        case "1":
-            alert("Usted a indicado que: " + dataConfirm[0]);
-            break;
-        case "2":
-            alert("Usted a confirmado: " + dataConfirm[1]);
-            break;
-        default:
-            alert("Cree su tarea de forma correcta");
-            break;
-    }
-
-    let listaTareas = [];
-
-
-    // Aqui se vuelve a ingresar la tarea y la fecha a de entrega en caso de indicar No y otra cosa
-    listaTareas.push(new crearTask(prompt("Agregue su Nombre: "), prompt("Agregue su Tarea: "), prompt("Agregue una fecha de Entrega ")));
-
-    // Alerta con un mensaje de la tarea y fecha ingresada anteriormente
-    alert(
-        "Su Nombre es : " + listaTareas[0].name +
-        " Su tarea es : " + listaTareas[0].tarea +
-        " Con fecha de entrega en: " + listaTareas[0].date
-    )
-    // Log de objeto   
-    console.log(listaTareas);
-
-    // Mensaje que entrega la info de validación de la tarea/fecha con un si o no
-    var validandoTask = prompt("Confirme con 0 para Yes si la tarea y fecha de entrega son correctas, de lo contrario escriba 1 para No, y volver a crear");
-
-    alert("Felicitaciones " + listaTareas[0].name + " Tarea ingresada correctamente");
-
-}
-
-// Guardar datos en la sesion
-const guardaLocal = (clave, valor) => {
-    sessionStorage.setItem(clave, valor)
-};
-
-for (const listaTarea of listaTareas) {
-    guardaLocal(listaTarea.name, JSON.stringify(listaTarea));
-}
-
-// Capturando datos de prompt Name, Tarea y Date
 let padre = document.getElementById("contenidoGenerado");
 
 
-for (const valida of validandoTask) {
-    let contenedor = document.createElement("p");
-    let inner = "";
+// Funcion con template de la tarea
+function generarSalida(validandoTask) {
 
-    contenedor.innerHTML = `
-    <div class="content">
-            <div class="header">
-            Nombre creador: ${listaTareas[0].name}
-            </div>
-            <div class="meta">
-            Su fecha de entrega es: ${listaTareas[0].date}
-            </div>
-            <div class="description">
-            Su tarea es: ${listaTareas[0].tarea}
-            </div>
-            </div>
-            <div class="extra content">
-            <div class="ui two buttons">
-                <div class="ui basic green button">Finalizar</div>
-                <div class="ui basic red button btn2">Borrar</div>
-            </div>
-            </div>`;
-    padre.appendChild(contenedor);
+    if (listaTareas.length) {
+
+        // contador.innerHTML = listaTareas.length;
+        for (valida of validandoTask) {
+
+            let inner = "";
+            // Capturando datos Name, Tarea y Date, formateandose en un div
+            padre.innerHTML = inner += `               
+                <div id="taskbody" class="content">  
+                     <div class="header">
+                        Nombre creador: ${valida.name}
+                     </div>
+                     <div class="meta">
+                         Su fecha de entrega es: ${valida.date}
+                     </div>
+                     <div class="description">
+                        Su tarea es: ${valida.tarea}
+                     </div>
+                    <div class="extra content">
+                            <div class="ui two buttons">
+                            <div id="btnEnd" class="ui basic green button">Finalizar</div>
+                            <div id="btnBorrarOut" class="ui basic red button">Borrar</div>
+                        </div>
+                    </div>
+                </div>
+                `;
+        }
+    }
 }
 
 
-function guardarTarea() {
+$(document).ready(function () {
+
+   
+    // Finalizar tarea
+    $("div#contenidoGenerado").on("click", "div#btnEnd", function () {
+        $(this).closest("div#taskbody.content").appendTo("div#contenidoBackup");
+    });
+    
+    // Borrar tarea
+    $("div#contenidoGenerado").on("click", "div#btnBorrarOut", function () {
+        $(this).closest("div#taskbody.content").remove();
+    });
+});
+
+// Boton que guarda la tarea desde la function guardarTarea
+const btnAgregar = document.getElementById("btnSave");
+
+btnAgregar.addEventListener('click', (e) => {
+
     let nuevoRegistro = {
-        // id: tasks.length + 1,
         name: document.getElementById("creatask").value,
         tarea: document.getElementById("titletask").value,
         date: document.getElementById("datetask").value
     }
-    listaTareas.push(new crearTask(nuevoRegistro));
+
+    listaTareas.push(nuevoRegistro);
     generarSalida(listaTareas);
-    body.innerHTML = inner;
 
-}
+    e.stopPropagation();
 
-document.getElementById("btnSave").onclick = guardarTarea;
+});
 
 
-  
+// Animacion en titulo
+$(document).ready(function () {
+    $('#title_tasktime').fadeIn(3000).removeClass('.hidden');
+    $("#title_tasktime").css("display", "inline-block");
+    $("#title_tasktime").css("font-size", "2.5rem");
+});
 
-// function myFunction() {
-//     let contenedorTareas = document.getElementById("task").parentElement;
-//     document.getElementById("demo").innerHTML = contenedorTareas;
-//     console.log(contenedorTareas);
-// }
+
+// Ajax consumir Pokeapi Ditto
+$(document).ready(function () {
+    $("#ejecutar_post").click(function () {
+        $.get("https://pokeapi.co/api/v2/pokemon/ditto", function (data, status) {
+            alert("Bienvenido: " + data.name + "\nRegistro de Email: " + status);
+        });
+    });
+});
+
+
+
+
+// addEventListener
+// input valor 0
+
+// localStorage para pasar a un segundo html
